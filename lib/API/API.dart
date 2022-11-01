@@ -7,9 +7,17 @@ class API {
   String apiKey = '2b6e3af0b577423063b6a6e271986215';
   static String mainurl = "https://api.themoviedb.org/3";
 
-  Future<List<Result>?> fetchMovies() async {
-    var url = Uri.parse(
-        '$mainurl/movie/now_playing?api_key=2b6e3af0b577423063b6a6e271986215');
+  var getTrendingmoivesUrl = '$mainurl/trending/movie/week';
+  var getPopularUrl = '$mainurl/movie/top_rated';
+  var getMoviesUrl = '$mainurl/discover/movie';
+  var getnowPlayingUrl = '$mainurl/movie/now_playing';
+  var getGenereUrl = '$mainurl/genre/movie/list';
+  var getPersonsUrl = '$mainurl/trending/person/week';
+
+  //fething Now playing movies
+  Future<List<Result>?> fetchNowPlayingMovies() async {
+    var url =
+        Uri.parse('$getnowPlayingUrl?api_key=2b6e3af0b577423063b6a6e271986215');
     final http.Response response = await http.get(
       url,
       headers: <String, String>{
