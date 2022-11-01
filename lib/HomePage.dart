@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
 import 'package:flutter_movieapp/Widgets.dart/nowPlayingwidget.dart';
+import 'package:flutter_movieapp/Widgets.dart/tredingMovies_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,6 +36,10 @@ class _HomePageState extends State<HomePage> {
               height: 10,
             ),
             NowPlayingwidget(),
+            SizedBox(
+              height: 20,
+            ),
+            TrendingMoviesWidget(),
           ],
         ));
   }

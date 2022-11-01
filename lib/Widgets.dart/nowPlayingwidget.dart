@@ -17,7 +17,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
       PageController(viewportFraction: 1, keepPage: true);
 
   final API moviesApi = API();
-  List<Result>? movieResults;
+  List<NowPlayingMoviesResult>? nowPlayingmovieResults;
   var isLoaded = false;
   var resultLength;
   @override
@@ -27,11 +27,11 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
   }
 
   getMoviesData() async {
-    movieResults = await API().fetchNowPlayingMovies();
-    if (movieResults != null) {
+    nowPlayingmovieResults = await API().fetchNowPlayingMovies();
+    if (nowPlayingmovieResults != null) {
       setState(() {
         isLoaded = true;
-        resultLength = movieResults!.take(10).length.toInt();
+        resultLength = nowPlayingmovieResults!.take(10).length.toInt();
       });
     }
   }
@@ -55,7 +55,6 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
               shape: IndicatorShape.circle(size: 5.0),
               child: PageView.builder(
                   scrollDirection: Axis.horizontal,
-                  //shrinkWrap: true,
                   itemCount: resultLength,
                   itemBuilder: (BuildContext context, int index) {
                     return Row(
@@ -63,7 +62,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                         children: [
                           Stack(children: [
                             Hero(
-                                tag: movieResults![index].id,
+                                tag: nowPlayingmovieResults![index].id,
                                 child: Container(
                                   margin: const EdgeInsets.only(
                                       right: 10, left: 10),
@@ -75,7 +74,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                                           fit: BoxFit.cover,
                                           image: NetworkImage(
                                               "https://image.tmdb.org/t/p/w500/" +
-                                                  movieResults![index]
+                                                  nowPlayingmovieResults![index]
                                                       .backdropPath))),
                                 )),
                             const Positioned(
@@ -100,7 +99,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        movieResults![index].title,
+                                        nowPlayingmovieResults![index].title,
                                         style: const TextStyle(
                                             height: 1.5,
                                             color: Colors.white,

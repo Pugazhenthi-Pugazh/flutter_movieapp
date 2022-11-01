@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'dart:convert';
 import 'package:flutter_movieapp/model.dart/NowPlayingModel.dart';
+import 'package:flutter_movieapp/model.dart/TrendingMoviesModel.dart';
 import 'package:http/http.dart' as http;
 
 class API {
@@ -15,7 +16,7 @@ class API {
   var getPersonsUrl = '$mainurl/trending/person/week';
 
   //fething Now playing movies
-  Future<List<Result>?> fetchNowPlayingMovies() async {
+  Future<List<NowPlayingMoviesResult>?> fetchNowPlayingMovies() async {
     var url =
         Uri.parse('$getnowPlayingUrl?api_key=2b6e3af0b577423063b6a6e271986215');
     final http.Response response = await http.get(
@@ -27,6 +28,23 @@ class API {
 
     if (response.statusCode == 200) {
       return nowPlayingmoviesFromJson(response.body).results.toList();
+    } else {
+      throw Exception("notfetched");
+    }
+  }
+
+  Future<List<TrendingMoivesResult>?> fetchTrendingMovies() async {
+    var url = Uri.parse(
+        '$getTrendingmoivesUrl?api_key=2b6e3af0b577423063b6a6e271986215');
+    final http.Response response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return trendingMoviesModelFromJson(response.body).results.toList();
     } else {
       throw Exception("notfetched");
     }
