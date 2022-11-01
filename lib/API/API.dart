@@ -7,7 +7,7 @@ class API {
   String apiKey = '2b6e3af0b577423063b6a6e271986215';
   static String mainurl = "https://api.themoviedb.org/3";
 
-  fetchMovies() async {
+  Future<List<Result>?> fetchMovies() async {
     var url = Uri.parse(
         '$mainurl/movie/now_playing?api_key=2b6e3af0b577423063b6a6e271986215');
     final http.Response response = await http.get(
@@ -18,8 +18,7 @@ class API {
     );
 
     if (response.statusCode == 200) {
-      var moviedata = json.decode(response.body);
-      return moviedata['results'];
+      return nowPlayingmoviesFromJson(response.body).results.toList();
     } else {
       throw Exception("notfetched");
     }
