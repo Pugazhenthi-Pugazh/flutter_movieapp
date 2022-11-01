@@ -41,8 +41,8 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
           style: TextStyle(
               height: 1.5,
               color: Colors.white,
-              fontWeight: FontWeight.w900,
-              fontSize: 23.0),
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0),
         ),
       ),
       const SizedBox(
@@ -62,16 +62,16 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(right: 10, left: 10),
-                        width: 130.0,
-                        height: 190.0,
+                        width: 120.0,
+                        height: 180.0,
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(3),
+                            borderRadius: BorderRadius.circular(2),
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
                                     // ignore: prefer_interpolation_to_compose_strings
-                                    "https://image.tmdb.org/t/p/w200/" +
+                                    "https://image.tmdb.org/t/p/w780/" +
                                         trendingmovieResults![index]
                                             .posterPath))),
                       ),

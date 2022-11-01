@@ -73,7 +73,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
                                           image: NetworkImage(
-                                              "https://image.tmdb.org/t/p/w500/" +
+                                              "https://image.tmdb.org/t/p/w1280/" +
                                                   nowPlayingmovieResults![index]
                                                       .backdropPath))),
                                 )),
