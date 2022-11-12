@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
-import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
+import 'package:flutter_movieapp/model.dart/topRatedMoviesModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class TrendingMoviesWidget extends StatefulWidget {
-  const TrendingMoviesWidget({super.key});
+class TopRatedMoviesWidget extends StatefulWidget {
+  const TopRatedMoviesWidget({super.key});
 
   @override
-  State<TrendingMoviesWidget> createState() => _TrendingMoviesWidgetState();
+  State<TopRatedMoviesWidget> createState() => _TopRatedMoviesWidgetState();
 }
 
-class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
-  List<TrendingMoivesResult>? trendingmovieResults;
+class _TopRatedMoviesWidgetState extends State<TopRatedMoviesWidget> {
+  List<TopRatedMoviesResult>? topRatedMoviesResults;
   var isLoaded = false;
-  var trending_ResultLength;
+  var topRatedMovies_ResultLength;
 
   @override
   void initState() {
     super.initState();
-    getTrendingMoviesData();
+    getTrendingPersonsData();
   }
 
-  getTrendingMoviesData() async {
-    trendingmovieResults = await API().fetchTrendingMovies();
-    if (trendingmovieResults != null) {
-      print(trendingmovieResults!.length.toString());
+  getTrendingPersonsData() async {
+    topRatedMoviesResults = await API().fetchTopRatedMovies();
+    if (topRatedMoviesResults != null) {
+      print(topRatedMoviesResults!.length.toString());
       setState(() {
         isLoaded = true;
-        trending_ResultLength = trendingmovieResults!.length.toInt();
+        topRatedMovies_ResultLength = topRatedMoviesResults!.length.toInt();
       });
     }
   }
@@ -38,7 +38,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
       Container(
         alignment: Alignment.centerLeft,
         child: const Text(
-          "  TRENDING MOVIES",
+          "  TOP RATED MOVIES",
           style: TextStyle(
               height: 1.5,
               color: Colors.white,
@@ -50,14 +50,14 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
         height: 10,
       ),
       Container(
-          height: 250,
+          height: 270,
           // color: Colors.white,
           child: Visibility(
               visible: isLoaded,
               replacement: Center(child: const CircularProgressIndicator()),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: trending_ResultLength,
+                itemCount: topRatedMovies_ResultLength,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
@@ -73,7 +73,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                                 image: NetworkImage(
                                     // ignore: prefer_interpolation_to_compose_strings
                                     "https://image.tmdb.org/t/p/w1280/" +
-                                        trendingmovieResults![index]
+                                        topRatedMoviesResults![index]
                                             .posterPath))),
                       ),
                       const SizedBox(
@@ -82,7 +82,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                       Container(
                         width: 120.0,
                         child: Text(
-                          trendingmovieResults![index].title,
+                          topRatedMoviesResults![index].title,
                           maxLines: 2,
                           style: const TextStyle(
                               height: 1.4,
@@ -99,7 +99,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                           child: Row(
                             children: [
                               Text(
-                                trendingmovieResults![index]
+                                topRatedMoviesResults![index]
                                     .voteAverage
                                     .toStringAsFixed(1),
                                 textAlign: TextAlign.start,
@@ -114,7 +114,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                               RatingBar.builder(
                                 itemSize: 8.0,
                                 initialRating:
-                                    trendingmovieResults![index].voteAverage /
+                                    topRatedMoviesResults![index].voteAverage /
                                         2,
                                 minRating: 1,
                                 direction: Axis.horizontal,

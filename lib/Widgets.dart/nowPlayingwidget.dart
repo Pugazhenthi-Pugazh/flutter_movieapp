@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
-import 'package:flutter_movieapp/model.dart/NowPlayingModel.dart';
+import 'package:flutter_movieapp/model.dart/nowPlayingModel.dart';
 import 'package:page_indicator/page_indicator.dart';
 
 class NowPlayingwidget extends StatefulWidget {
@@ -101,7 +101,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                                       Text(
                                         nowPlayingmovieResults![index].title,
                                         style: const TextStyle(
-                                            height: 1.5,
+                                            height: 1.2,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w900,
                                             fontSize: 23.0),
