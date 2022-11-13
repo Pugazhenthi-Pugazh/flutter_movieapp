@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
+import 'package:flutter_movieapp/Widgets.dart/genersWidget.dart';
 import 'package:flutter_movieapp/Widgets.dart/nowPlayingwidget.dart';
 import 'package:flutter_movieapp/Widgets.dart/tredingMovies_widget.dart';
 import 'package:flutter_movieapp/Widgets.dart/topRatedMovieswidget.dart';
@@ -14,6 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final API moviesApi = API();
+  @override
+  void initState() {
+    super.initState();
+    API().fetchGeneresList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,7 @@ class _HomePageState extends State<HomePage> {
             ),
             TrendingMoviesWidget(),
             TopRatedMoviesWidget(),
+            GenersMoiveWidget(),
           ],
         ));
   }
