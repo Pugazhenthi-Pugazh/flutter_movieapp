@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:flutter_movieapp/model.dart/genersListModel.dart';
 import 'package:flutter_movieapp/model.dart/genersMoviesModel.dart';
+import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
 import 'package:flutter_movieapp/model.dart/nowPlayingModel.dart';
 import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
 import 'package:flutter_movieapp/model.dart/topRatedMoviesModel.dart';
@@ -17,6 +18,7 @@ class API {
   var getnowPlayingUrl = '$mainurl/movie/now_playing';
   var getGenereUrl = '$mainurl/genre/movie/list';
   var getPersonsUrl = '$mainurl/trending/person/week';
+  var getMoviesdetailsUrl = '$mainurl/movie';
 
   //fething Now playing movies
   Future<List<NowPlayingMoviesResult>?> fetchNowPlayingMovies() async {
@@ -94,6 +96,22 @@ class API {
 
     if (response.statusCode == 200) {
       return genersMoviesModelFromJson(response.body).results.toList();
+    } else {
+      throw Exception("notfetched");
+    }
+  }
+
+  Future<MoviesdetailsResponse> fetchMoviesDetails(int id) async {
+    var url = Uri.parse('$getMoviesdetailsUrl/$id?api_key=$apiKey');
+    final http.Response response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return trendingMoviesResponseFromJson(response.body);
     } else {
       throw Exception("notfetched");
     }

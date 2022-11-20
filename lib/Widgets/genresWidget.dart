@@ -42,7 +42,7 @@ class _GenresWidgetState extends State<GenresWidget>
                           bottom: TabBar(
                             physics: const BouncingScrollPhysics(),
                             isScrollable: true,
-                            indicatorColor: Colors.white,
+                            indicatorColor: const Color(0xFFF4c10F),
                             indicatorSize: TabBarIndicatorSize.tab,
                             indicatorWeight: 3.0,
                             unselectedLabelColor: Colors.grey[700],

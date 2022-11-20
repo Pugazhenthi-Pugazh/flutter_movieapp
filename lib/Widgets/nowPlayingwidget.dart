@@ -102,10 +102,10 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                                       Text(
                                         nowPlayingmovieResults![index].title,
                                         style: const TextStyle(
-                                            height: 1.2,
+                                            height: 1.1,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w900,
-                                            fontSize: 23.0),
+                                            fontSize: 22.0),
                                       )
                                     ],
                                   ),

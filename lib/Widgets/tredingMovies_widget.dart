@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
+import 'package:flutter_movieapp/Pages/movieDetails_page.dart';
 import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -63,21 +64,33 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 10, left: 10),
-                        width: 120.0,
-                        height: 180.0,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(2),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    // ignore: prefer_interpolation_to_compose_strings
-                                    "https://image.tmdb.org/t/p/w1280/" +
-                                        trendingmovieResults![index]
-                                            .posterPath))),
-                      ),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MoviesDetails(
+                                        movieId: trendingmovieResults![index]
+                                            .id
+                                            .toInt(),
+                                      )),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 10, left: 10),
+                            width: 120.0,
+                            height: 180.0,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(2),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        // ignore: prefer_interpolation_to_compose_strings
+                                        "https://image.tmdb.org/t/p/w1280/" +
+                                            trendingmovieResults![index]
+                                                .posterPath))),
+                          )),
                       const SizedBox(
                         height: 10,
                       ),
