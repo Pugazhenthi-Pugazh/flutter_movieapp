@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movieapp/model.dart/genersMoviesModel.dart';
 import 'package:flutter_movieapp/API/API.dart';
-import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class TrendingMoviesWidget extends StatefulWidget {
-  const TrendingMoviesWidget({super.key});
+class GenresMovieWidget extends StatefulWidget {
+  const GenresMovieWidget({super.key, required this.generid});
+  final int generid;
 
   @override
-  State<TrendingMoviesWidget> createState() => _TrendingMoviesWidgetState();
+
+  // ignore: no_logic_in_create_state
+  State<GenresMovieWidget> createState() => _GenresMovieWidgetState(generid);
 }
 
-class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
-  List<TrendingMoivesResult>? trendingmovieResults;
+class _GenresMovieWidgetState extends State<GenresMovieWidget> {
+  List<GenersMoviesResult>? genersMoviesResults;
   var isLoaded = false;
-  var trending_ResultLength;
+  var genersMovies_ResultLength;
+  final int generid;
+  _GenresMovieWidgetState(this.generid);
 
   @override
   void initState() {
     super.initState();
-    getTrendingMoviesData();
+    getGenersMoviesData();
   }
 
-  getTrendingMoviesData() async {
-    trendingmovieResults = await API().fetchTrendingMovies();
-    if (trendingmovieResults != null) {
-      print(trendingmovieResults!.length.toString());
+  getGenersMoviesData() async {
+    genersMoviesResults = await API().fetchGeneresMovies(generid);
+    if (genersMoviesResults != null) {
       setState(() {
         isLoaded = true;
-        trending_ResultLength = trendingmovieResults!.length.toInt();
+        genersMovies_ResultLength = genersMoviesResults!.length.toInt();
       });
     }
   }
@@ -36,53 +40,60 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
-        alignment: Alignment.centerLeft,
-        child: const Text(
-          "  TRENDING MOVIES",
-          style: TextStyle(
-              height: 1.5,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0),
-        ),
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      Container(
-          height: 250,
+          height: 270,
           // color: Colors.white,
           child: Visibility(
               visible: isLoaded,
-              replacement: Center(child: const CircularProgressIndicator()),
+              replacement: const Center(child: CircularProgressIndicator()),
               child: ListView.builder(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: trending_ResultLength,
+                itemCount: genersMovies_ResultLength,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 10, left: 10),
-                        width: 120.0,
-                        height: 180.0,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(2),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    // ignore: prefer_interpolation_to_compose_strings
-                                    "https://image.tmdb.org/t/p/w1280/" +
-                                        trendingmovieResults![index]
-                                            .posterPath))),
+                      SizedBox(
+                        height: 10,
                       ),
+                      // ignore: unnecessary_null_comparison
+                      genersMoviesResults![index].posterPath == null
+                          ? Container(
+                              height: 180,
+                              width: 120,
+                              decoration: const BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(2.0)),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Column(
+                                children: const [Icon(Icons.movie_rounded)],
+                              ),
+                            )
+                          : Container(
+                              margin:
+                                  const EdgeInsets.only(right: 10, left: 10),
+                              width: 120.0,
+                              height: 180.0,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(2),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          // ignore: prefer_interpolation_to_compose_strings
+                                          "https://image.tmdb.org/t/p/w1280/" +
+                                              genersMoviesResults![index]
+                                                  .posterPath))),
+                            ),
                       const SizedBox(
                         height: 10,
                       ),
                       Container(
                         width: 120.0,
                         child: Text(
-                          trendingmovieResults![index].title,
+                          genersMoviesResults![index].title,
                           maxLines: 2,
                           style: const TextStyle(
                               height: 1.4,
@@ -99,7 +110,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                           child: Row(
                             children: [
                               Text(
-                                trendingmovieResults![index]
+                                genersMoviesResults![index]
                                     .voteAverage
                                     .toStringAsFixed(1),
                                 textAlign: TextAlign.start,
@@ -114,8 +125,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                               RatingBar.builder(
                                 itemSize: 8.0,
                                 initialRating:
-                                    trendingmovieResults![index].voteAverage /
-                                        2,
+                                    genersMoviesResults![index].voteAverage / 2,
                                 minRating: 1,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
@@ -137,5 +147,6 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                 },
               )))
     ]);
+    ;
   }
 }

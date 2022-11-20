@@ -1,10 +1,10 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
-import 'package:flutter_movieapp/Widgets.dart/genersWidget.dart';
-import 'package:flutter_movieapp/Widgets.dart/nowPlayingwidget.dart';
-import 'package:flutter_movieapp/Widgets.dart/tredingMovies_widget.dart';
-import 'package:flutter_movieapp/Widgets.dart/topRatedMovieswidget.dart';
+import 'package:flutter_movieapp/Widgets/genresWidget.dart';
+import 'package:flutter_movieapp/Widgets/nowPlayingwidget.dart';
+import 'package:flutter_movieapp/Widgets/tredingMovies_widget.dart';
+import 'package:flutter_movieapp/Widgets/topRatedMovieswidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center,
             ))),
         body: ListView(
+          shrinkWrap: true,
           children: const [
             SizedBox(
               height: 10,
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             ),
             TrendingMoviesWidget(),
             TopRatedMoviesWidget(),
-            GenersMoiveWidget(),
+            GenresWidget(),
           ],
         ));
   }

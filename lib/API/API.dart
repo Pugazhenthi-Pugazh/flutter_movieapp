@@ -84,18 +84,15 @@ class API {
   }
 
   Future<List<GenersMoviesResult>?> fetchGeneresMovies(int id) async {
-    var url = Uri.parse('$getMoviesUrl?api_key=$apiKey');
-    final body = {"with_genres": id};
-    final http.Response response = await http.post(
+    var url = Uri.parse('$getMoviesUrl?api_key=$apiKey&with_genres=$id');
+    final http.Response response = await http.get(
       url,
-      body: json.encode(body),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
 
     if (response.statusCode == 200) {
-      print(response.body);
       return genersMoviesModelFromJson(response.body).results.toList();
     } else {
       throw Exception("notfetched");

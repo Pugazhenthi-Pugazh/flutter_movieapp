@@ -18,10 +18,10 @@ class _TopRatedMoviesWidgetState extends State<TopRatedMoviesWidget> {
   @override
   void initState() {
     super.initState();
-    getTrendingPersonsData();
+    getTopRatedMoviesData();
   }
 
-  getTrendingPersonsData() async {
+  getTopRatedMoviesData() async {
     topRatedMoviesResults = await API().fetchTopRatedMovies();
     if (topRatedMoviesResults != null) {
       print(topRatedMoviesResults!.length.toString());
@@ -49,13 +49,16 @@ class _TopRatedMoviesWidgetState extends State<TopRatedMoviesWidget> {
       const SizedBox(
         height: 10,
       ),
+      // ignore: sized_box_for_whitespace
       Container(
           height: 270,
           // color: Colors.white,
           child: Visibility(
               visible: isLoaded,
-              replacement: Center(child: const CircularProgressIndicator()),
+              replacement: const Center(child: CircularProgressIndicator()),
               child: ListView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: topRatedMovies_ResultLength,
                 itemBuilder: (BuildContext context, int index) {

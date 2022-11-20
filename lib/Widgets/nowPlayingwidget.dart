@@ -54,6 +54,7 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
               indicatorSelectorColor: const Color(0xFFF4c10F),
               shape: IndicatorShape.circle(size: 5.0),
               child: PageView.builder(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: resultLength,
                   itemBuilder: (BuildContext context, int index) {

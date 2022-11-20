@@ -59,7 +59,7 @@ class GenersMoviesResult {
   });
 
   bool adult;
-  String backdropPath;
+  String? backdropPath;
   List<int> genreIds;
   int id;
   OriginalLanguage? originalLanguage;
