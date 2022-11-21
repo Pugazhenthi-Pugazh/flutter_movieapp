@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class MoviesDetails extends StatefulWidget {
   const MoviesDetails({super.key, required this.movieId});
@@ -45,23 +46,43 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                 slivers: [
                   SliverAppBar(
                     expandedHeight: 240,
+                    pinned: true,
                     backgroundColor: const Color.fromARGB(255, 21, 28, 38),
                     flexibleSpace: FlexibleSpaceBar(
                       titlePadding: EdgeInsets.only(left: 5, bottom: 6),
                       title: Text(
                         movieDetailsResults?.title ?? "".toString(),
+                        style: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
-                      background: Container(
-                        // margin: const EdgeInsets.only(right: 10, left: 10),
-                        //   width: MediaQuery.of(context).size.width - 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            // borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    "https://image.tmdb.org/t/p/w1280/${movieDetailsResults!.backdropPath}"))),
-                      ),
+                      background: Stack(children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(2),
+                              image: DecorationImage(
+                                  fit: BoxFit.cover, image: NetworkImage(
+                                      // ignore: prefer_interpolation_to_compose_strings
+                                      "https://image.tmdb.org/t/p/w1280/${movieDetailsResults!.backdropPath}"))),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.1)),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.0),
+                                Colors.black.withOpacity(0.5)
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: const [0, 1],
+                            ),
+                          ),
+                        ),
+                      ]),
                     ),
                   ),
                   SliverPadding(
@@ -74,7 +95,7 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Padding(
-                                  padding: EdgeInsets.only(left: 10),
+                                  padding: EdgeInsets.only(left: 5),
                                   child: Text(
                                     "OVERVIEW",
                                     style: TextStyle(
@@ -86,7 +107,8 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                                 height: 5.0,
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, bottom: 10, top: 10, right: 10),
                                 child: Text(
                                   movieDetailsResults!.overview.toString(),
                                   style: const TextStyle(
