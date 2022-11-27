@@ -40,7 +40,7 @@ class MoviesdetailsResponse {
   });
 
   bool adult;
-  String backdropPath;
+  String? backdropPath;
   dynamic belongsToCollection;
   int budget;
   List<Genre> genres;

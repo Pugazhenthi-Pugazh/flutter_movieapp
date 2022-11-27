@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MoviesDetails extends StatefulWidget {
@@ -45,17 +46,25 @@ class _MoviesDetailsState extends State<MoviesDetails> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    expandedHeight: 240,
-                    pinned: true,
+                    expandedHeight: 200,
+                    // pinned: true,
                     backgroundColor: const Color.fromARGB(255, 21, 28, 38),
                     flexibleSpace: FlexibleSpaceBar(
-                      titlePadding: EdgeInsets.only(left: 5, bottom: 6),
+                      titlePadding: const EdgeInsets.only(left: 10, bottom: 10),
                       title: Text(
                         movieDetailsResults?.title ?? "".toString(),
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       background: Stack(children: [
+                        Shimmer.fromColors(
+                            baseColor: Colors.white,
+                            highlightColor: Colors.white54,
+                            child: Container(
+                                decoration: const BoxDecoration(
+                              color: Colors.black12,
+                            ))),
+
                         Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
@@ -74,7 +83,7 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                             gradient: LinearGradient(
                               colors: [
                                 Colors.black.withOpacity(0.0),
-                                Colors.black.withOpacity(0.5)
+                                Colors.black.withOpacity(0.2)
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -82,6 +91,23 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                             ),
                           ),
                         ),
+                        //  AspectRatio(
+                        //    aspectRatio: 1.8234,
+                        //    child: Container(
+                        //      decoration: BoxDecoration(
+                        //        gradient: LinearGradient(
+                        //          colors: [
+                        //            Colors.black.withOpacity(0.1),
+                        //            const Color.fromARGB(255, 21, 28, 38)
+                        //                .withOpacity(1.0)
+                        //          ],
+                        //          begin: Alignment.topCenter,
+                        //          end: Alignment.bottomCenter,
+                        //          stops: const [0, 1],
+                        //        ),
+                        //      ),
+                        //    ),
+                        //  ),
                       ]),
                     ),
                   ),
@@ -94,6 +120,76 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Row(
+                                children: [
+                                  const Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 5.0,
+                                          bottom: 10,
+                                          top: 10,
+                                          right: 10),
+                                      child: Icon(
+                                        Icons.access_time_rounded,
+                                        color: Colors.white,
+                                        size: 20,
+                                      )),
+                                  Text(
+                                    getDuration(movieDetailsResults!.runtime),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        height: 1.5),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      height: 40.0,
+                                      padding:
+                                          const EdgeInsets.only(right: 10.0),
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            movieDetailsResults!.genres.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 5.0),
+                                            child: Center(
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                30.0)),
+                                                    color: Colors.white
+                                                        .withOpacity(0.1)),
+                                                child: Text(
+                                                  movieDetailsResults!
+                                                      .genres[index].name,
+                                                  maxLines: 2,
+                                                  style: const TextStyle(
+                                                      height: 1.4,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 9.0),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               const Padding(
                                   padding: EdgeInsets.only(left: 5),
                                   child: Text(
@@ -119,7 +215,7 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ])))
                 ],
               ),
@@ -133,5 +229,11 @@ class _MoviesDetailsState extends State<MoviesDetails> {
             return const Center(child: CircularProgressIndicator());
           }
         });
+  }
+
+  String getDuration(int minutes) {
+    var d = Duration(minutes: minutes);
+    List<String> parts = d.toString().split(':');
+    return '${parts[0].padLeft(2, '0')}h ${parts[1].padLeft(2, '0')}min';
   }
 }
