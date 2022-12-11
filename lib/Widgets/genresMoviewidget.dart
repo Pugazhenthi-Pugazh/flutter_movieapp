@@ -143,6 +143,7 @@ class _GenresMovieWidgetState extends State<GenresMovieWidget> {
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 5,
+                                unratedColor: Colors.white.withOpacity(0.5),
                                 itemPadding:
                                     const EdgeInsets.symmetric(horizontal: 2.0),
                                 itemBuilder: (context, _) => const Icon(

@@ -134,6 +134,7 @@ class _TrendingMoviesWidgetState extends State<TrendingMoviesWidget> {
                                 minRating: 1,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
+                                unratedColor: Colors.white.withOpacity(0.5),
                                 itemCount: 5,
                                 itemPadding:
                                     const EdgeInsets.symmetric(horizontal: 2.0),
