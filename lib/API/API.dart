@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_movieapp/model.dart/genersListModel.dart';
 import 'package:flutter_movieapp/model.dart/genersMoviesModel.dart';
 import 'package:flutter_movieapp/model.dart/movieCastsModel.dart';
+import 'package:flutter_movieapp/model.dart/movieTrailerModel.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
 import 'package:flutter_movieapp/model.dart/nowPlayingModel.dart';
 import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
@@ -129,6 +130,22 @@ class API {
 
     if (response.statusCode == 200) {
       return castResponseFromJson(response.body).cast.toList();
+    } else {
+      throw Exception("notfetched");
+    }
+  }
+
+  Future<List<MovieTrailerResult>?> fetchTrailer(int id) async {
+    var url = Uri.parse('$mainurl/movie/$id/videos?api_key=$apiKey');
+    final http.Response response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return movieTrailerResponseModelFromJson(response.body).moviTrailerResult;
     } else {
       throw Exception("notfetched");
     }

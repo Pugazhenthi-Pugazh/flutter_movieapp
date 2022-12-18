@@ -1,6 +1,7 @@
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
+import 'package:flutter_movieapp/Pages/trailerPage.dart';
 import 'package:flutter_movieapp/Widgets/castWidget.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -53,8 +54,7 @@ class _MoviesDetailsState extends State<MoviesDetails> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    expandedHeight: 190,
-
+                    expandedHeight: 200,
                     // pinned: true,
                     backgroundColor: const Color.fromARGB(255, 21, 28, 38),
                     flexibleSpace: FlexibleSpaceBar(
@@ -100,6 +100,28 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                             ),
                           ),
                         ),
+
+                        Positioned(
+                            top: 0,
+                            bottom: 0,
+                            right: 0,
+                            left: 0,
+                            child: IconButton(
+                              color: Color(0xFFF4c10F),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MovieTrailerPage(
+                                            id: movieDetailsResults!.id,
+                                          )),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.play_circle_outline_rounded,
+                                size: 50,
+                              ),
+                            )),
                         //  AspectRatio(
                         //    aspectRatio: 1.8234,
                         //    child: Container(
@@ -127,9 +149,10 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
+                            // ignore: avoid_unnecessary_containers
                             Container(
                                 child: Row(
                               children: [
@@ -269,6 +292,10 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                                       fontSize: 14.0,
                                       color: Colors.white.withOpacity(0.5))),
                             ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            // ignore: avoid_unnecessary_containers
                             Container(
                               child: MovieCasts(id: movieDetailsResults!.id),
                             ),

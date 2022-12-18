@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
+import 'package:flutter_movieapp/Pages/trailerPage.dart';
 import 'package:flutter_movieapp/model.dart/nowPlayingModel.dart';
 import 'package:page_indicator/page_indicator.dart';
 
@@ -78,15 +79,29 @@ class _NowPlayingwidgetState extends State<NowPlayingwidget> {
                                                   nowPlayingmovieResults![index]
                                                       .backdropPath))),
                                 )),
-                            const Positioned(
+                            Positioned(
                                 top: 0,
                                 bottom: 0,
                                 right: 0,
                                 left: 0,
-                                child: Icon(
-                                  Icons.play_circle_outline_rounded,
+                                child: IconButton(
                                   color: Color(0xFFF4c10F),
-                                  size: 50,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MovieTrailerPage(
+                                                id: nowPlayingmovieResults![
+                                                        index]
+                                                    .id,
+                                              )),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.play_circle_outline_rounded,
+                                    size: 50,
+                                  ),
                                 )),
                             Positioned(
                                 bottom: 20.0,

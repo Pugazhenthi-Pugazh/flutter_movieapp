@@ -38,6 +38,7 @@ dependencies:
   shimmer: ^2.0.0
   cached_network_image: ^3.2.3
   currency_formatter: ^2.0.0
+  youtube_player_flutter: ^8.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

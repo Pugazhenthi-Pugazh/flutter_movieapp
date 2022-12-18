@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
 import 'package:flutter_movieapp/model.dart/movieCastsModel.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class MovieCasts extends StatefulWidget {
   final int id;
