@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
+import 'package:flutter_movieapp/Pages/searchPage.dart';
 import 'package:flutter_movieapp/Widgets/genresWidget.dart';
 import 'package:flutter_movieapp/Widgets/nowPlayingwidget.dart';
 import 'package:flutter_movieapp/Widgets/tredingMovies_widget.dart';
@@ -30,7 +31,14 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: const Color.fromARGB(255, 21, 28, 38),
             actions: <Widget>[
               IconButton(
-                  icon: const Icon(Icons.search_rounded), onPressed: () {})
+                  icon: const Icon(Icons.search_rounded),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MovieSearchPage()),
+                    );
+                  })
             ],
             centerTitle: true,
             title: (const Text(
