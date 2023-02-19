@@ -300,7 +300,7 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                               child: MovieCasts(id: movieDetailsResults!.id),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(left: 5),
                               child: Text("ABOUT MOVIE",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
