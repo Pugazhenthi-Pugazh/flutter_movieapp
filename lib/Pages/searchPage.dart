@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:flutter_movieapp/Widgets/searchResultwidget.dart';
 
 class MovieSearchPage extends StatefulWidget {
   const MovieSearchPage({super.key});
@@ -9,6 +10,7 @@ class MovieSearchPage extends StatefulWidget {
 }
 
 class _MovieSearchPageState extends State<MovieSearchPage> {
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,29 +26,57 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                 height: 40,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        color: Colors.white,
-                      )),
+                  const BackButton(
+                    color: Colors.white,
+                  ),
+                  Expanded(child: LayoutBuilder(builder: (context, constrait) {
+                    final padding = (MediaQuery.of(context).size.width -
+                        constrait.maxWidth);
+                    return Padding(
+                        padding: EdgeInsets.only(right: padding),
+                        child: const Center(
+                          child: Text(
+                            "Search",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ));
+                  })),
+                ],
+              ),
+              Row(
+                children: [
                   Expanded(
                     child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: TextField(
+                        padding: const EdgeInsets.all(10),
+                        child: TextFormField(
+                          controller: _controller,
+                          onChanged: (text) {
+                            setState(() {});
+                          },
                           style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                               filled: true,
                               hintStyle: const TextStyle(color: Colors.grey),
-                              hintText: "Search here",
-                              prefixIcon: const Icon(
-                                Icons.search_rounded,
-                                color: Colors.grey,
-                              ),
+                              hintText: "Search..",
+                              suffixIcon: _controller.text.length > 0
+                                  ? IconButton(
+                                      onPressed: () {
+                                        _controller.clear();
+                                        setState(() {});
+                                      },
+                                      icon: const Icon(Icons.clear,
+                                          color: Colors.grey))
+                                  : const Icon(
+                                      Icons.search_rounded,
+                                      color: Colors.grey,
+                                    ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.transparent),
@@ -59,10 +89,10 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                                   borderRadius: BorderRadius.circular(10))),
                         )),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  )
                 ],
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
           ),

@@ -6,6 +6,7 @@ import 'package:flutter_movieapp/model.dart/movieCastsModel.dart';
 import 'package:flutter_movieapp/model.dart/movieTrailerModel.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
 import 'package:flutter_movieapp/model.dart/nowPlayingModel.dart';
+import 'package:flutter_movieapp/model.dart/searchResultModel.dart';
 import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
 import 'package:flutter_movieapp/model.dart/topRatedMoviesModel.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +22,7 @@ class API {
   var getGenereUrl = '$mainurl/genre/movie/list';
   var getPersonsUrl = '$mainurl/trending/person/week';
   var getMoviesdetailsUrl = '$mainurl/movie';
+  var getSearchMovieResultUrl = '$mainurl/search/movie';
 
   //fething Now playing movies
   Future<List<NowPlayingMoviesResult>?> fetchNowPlayingMovies() async {
@@ -146,6 +148,23 @@ class API {
 
     if (response.statusCode == 200) {
       return movieTrailerResponseModelFromJson(response.body).moviTrailerResult;
+    } else {
+      throw Exception("notfetched");
+    }
+  }
+
+  Future<List<SearchMoiveResult>> fetchSearchResult(String movieName) async {
+    var url = Uri.parse(
+        '$getSearchMovieResultUrl?api_key=$apiKey&language=en-US&query=$movieName&page=1&include_adult=false');
+    final http.Response response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return searchResultFromJson(response.body).results.toList();
     } else {
       throw Exception("notfetched");
     }
