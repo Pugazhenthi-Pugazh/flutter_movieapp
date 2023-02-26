@@ -48,7 +48,7 @@ class SearchMoiveResult {
     required this.originalTitle,
     required this.overview,
     required this.popularity,
-    required this.posterPath,
+    this.posterPath,
     required this.releaseDate,
     required this.title,
     required this.video,
@@ -64,7 +64,7 @@ class SearchMoiveResult {
   String originalTitle;
   String overview;
   double popularity;
-  String posterPath;
+  String? posterPath;
   String releaseDate;
   String title;
   bool video;

@@ -10,7 +10,13 @@ class MovieSearchPage extends StatefulWidget {
 }
 
 class _MovieSearchPageState extends State<MovieSearchPage> {
-  final _controller = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  final TextEditingController _controller = TextEditingController();
+  var movienametext;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +26,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
         //   title: const Text("Search for a movie"),
         // ),
         body: Container(
+            child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
@@ -56,8 +63,17 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                         padding: const EdgeInsets.all(10),
                         child: TextFormField(
                           controller: _controller,
+                          onFieldSubmitted: (value) {
+                            setState(() {
+                              movienametext = value;
+                            });
+                          },
                           onChanged: (text) {
-                            setState(() {});
+                            if (text == "") {
+                              setState(() {
+                                movienametext = null;
+                              });
+                            }
                           },
                           style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
@@ -69,7 +85,10 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                                   ? IconButton(
                                       onPressed: () {
                                         _controller.clear();
-                                        setState(() {});
+                                        setState(() {
+                                          movienametext = null;
+                                        });
+                                        // print(movienametext);
                                       },
                                       icon: const Icon(Icons.clear,
                                           color: Colors.grey))
@@ -91,11 +110,19 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
+              movienametext != null
+                  ? Container(
+                      child: SingleChildScrollView(
+                        child: SearchResultWiget(
+                            movieName: movienametext.toString()),
+                      ),
+                    )
+                  : Container()
             ],
           ),
-        ));
+        )));
   }
 }
