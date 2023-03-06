@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             ],
             centerTitle: true,
             title: (const Text(
-              "Movie app",
+              "Movie Buff",
               textAlign: TextAlign.center,
             ))),
         body: ListView(
