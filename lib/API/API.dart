@@ -7,6 +7,7 @@ import 'package:flutter_movieapp/model.dart/movieTrailerModel.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
 import 'package:flutter_movieapp/model.dart/nowPlayingModel.dart';
 import 'package:flutter_movieapp/model.dart/searchResultModel.dart';
+import 'package:flutter_movieapp/model.dart/smilarMoviesModel.dart';
 import 'package:flutter_movieapp/model.dart/trendingMoviesModel.dart';
 import 'package:flutter_movieapp/model.dart/topRatedMoviesModel.dart';
 import 'package:http/http.dart' as http;
@@ -165,6 +166,24 @@ class API {
 
     if (response.statusCode == 200) {
       return searchResultFromJson(response.body).results.toList();
+    } else {
+      throw Exception("notfetched");
+    }
+  }
+
+  Future<List<SimilarMovieResult>> fetchSimilarmovies(int id) async {
+    var url = Uri.parse('$mainurl/movie/$id/similar?api_key=$apiKey');
+    final http.Response response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return similarMoviesModelFromJson(response.body)
+          .similarmovieresults
+          .toList();
     } else {
       throw Exception("notfetched");
     }

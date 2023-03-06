@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movieapp/API/API.dart';
 import 'package:flutter_movieapp/Pages/trailerPage.dart';
 import 'package:flutter_movieapp/Widgets/castWidget.dart';
+import 'package:flutter_movieapp/Widgets/similarMovieswidget.dart';
 import 'package:flutter_movieapp/model.dart/moviesdetailsModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shimmer/shimmer.dart';
@@ -381,7 +382,22 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                               ),
                             ),
                             const SizedBox(
-                              height: 12,
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text("SIMILAR MOVIES",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14.0,
+                                      color: Colors.white.withOpacity(0.5))),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              child: SimilarMovies(
+                                  movieId: movieDetailsResults!.id),
                             ),
                           ],
                         ),
