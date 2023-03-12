@@ -58,149 +58,149 @@ class _SearchResultWigetState extends State<SearchResultWiget> {
               scrollDirection: Axis.vertical,
               itemCount: searchMovieResult_ResultLength,
               itemBuilder: (BuildContext context, int index) {
-                return SingleChildScrollView(
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MoviesDetails(
-                                      movieId:
-                                          searchMovieResult![index].id.toInt(),
-                                    )),
-                          );
-                        },
-                        child: Card(
-                            color: const Color.fromARGB(255, 21, 28, 38),
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Row(children: [
-                                    searchMovieResult![index].posterPath == null
-                                        ? Container(
-                                            margin: const EdgeInsets.only(
-                                                right: 10, left: 10),
-                                            width: 100.0,
-                                            height: 130.0,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.rectangle,
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
-                                            ),
-                                            child: const Icon(
-                                              Icons.image_outlined,
-                                              size: 100,
-                                              color: Colors.grey,
-                                            ))
-                                        : Container(
-                                            margin: const EdgeInsets.only(
-                                                right: 10, left: 10),
-                                            width: 100.0,
-                                            height: 130.0,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                                image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image: NetworkImage(
-                                                        // ignore: prefer_interpolation_to_compose_strings
-                                                        "https://image.tmdb.org/t/p/w1280/" +
-                                                            searchMovieResult![
-                                                                    index]
-                                                                .posterPath
-                                                                .toString()))),
-                                          ),
-                                    const SizedBox(
-                                      width: 5,
+                return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MoviesDetails(
+                                  movieId: searchMovieResult![index].id.toInt(),
+                                )),
+                      );
+                    },
+                    child: Card(
+                        color: const Color.fromARGB(255, 21, 28, 38),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Row(children: [
+                                searchMovieResult![index].posterPath == null
+                                    ? Container(
+                                        margin: const EdgeInsets.only(
+                                            right: 10, left: 10),
+                                        width: 100.0,
+                                        height: 130.0,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                        ),
+                                        child: const Icon(
+                                          Icons.image_outlined,
+                                          size: 100,
+                                          color: Colors.grey,
+                                        ))
+                                    : Container(
+                                        margin: const EdgeInsets.only(
+                                            right: 10, left: 10),
+                                        width: 100.0,
+                                        height: 130.0,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(2),
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(
+                                                    // ignore: prefer_interpolation_to_compose_strings
+                                                    "https://image.tmdb.org/t/p/w1280/" +
+                                                        searchMovieResult![
+                                                                index]
+                                                            .posterPath
+                                                            .toString()))),
+                                      ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          200,
+                                      child: Text(
+                                        searchMovieResult![index].title,
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                            height: 1.4,
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Container(
-                                          width: 250.0,
-                                          child: Text(
-                                            searchMovieResult![index].title,
-                                            maxLines: 2,
-                                            style: const TextStyle(
-                                                height: 1.4,
-                                                fontSize: 15,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                            width: 250.0,
-                                            child: Row(
-                                              children: [
-                                                Text(
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                        width: 100.0,
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              searchMovieResult![index]
+                                                  .voteAverage
+                                                  .toStringAsFixed(1),
+                                              textAlign: TextAlign.start,
+                                              maxLines: 4,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const SizedBox(
+                                              width: 5.0,
+                                            ),
+                                            RatingBar.builder(
+                                              itemSize: 8.0,
+                                              initialRating:
                                                   searchMovieResult![index]
-                                                      .voteAverage
-                                                      .toStringAsFixed(1),
-                                                  textAlign: TextAlign.start,
-                                                  maxLines: 4,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 10.0,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                const SizedBox(
-                                                  width: 5.0,
-                                                ),
-                                                RatingBar.builder(
-                                                  itemSize: 8.0,
-                                                  initialRating:
-                                                      searchMovieResult![index]
-                                                              .voteAverage /
-                                                          2,
-                                                  minRating: 1,
-                                                  direction: Axis.horizontal,
-                                                  allowHalfRating: true,
-                                                  unratedColor: Colors.white
-                                                      .withOpacity(0.5),
-                                                  itemCount: 5,
-                                                  itemPadding: const EdgeInsets
-                                                          .symmetric(
+                                                          .voteAverage /
+                                                      2,
+                                              minRating: 1,
+                                              direction: Axis.horizontal,
+                                              allowHalfRating: true,
+                                              unratedColor:
+                                                  Colors.white.withOpacity(0.5),
+                                              itemCount: 5,
+                                              itemPadding:
+                                                  const EdgeInsets.symmetric(
                                                       horizontal: 2.0),
-                                                  itemBuilder: (context, _) =>
-                                                      const Icon(
-                                                    Icons.star,
-                                                    color: Colors.yellow,
-                                                  ),
-                                                  onRatingUpdate: (rating) {
-                                                    print(rating);
-                                                  },
-                                                )
-                                              ],
-                                            )),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                          width: 250,
-                                          child: Text(
-                                            searchMovieResult![index]
-                                                .overview
-                                                .toString(),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12.0,
-                                                height: 1.5),
-                                          ),
-                                        )
-                                      ],
+                                              itemBuilder: (context, _) =>
+                                                  const Icon(
+                                                Icons.star,
+                                                color: Colors.yellow,
+                                              ),
+                                              onRatingUpdate: (rating) {
+                                                print(rating);
+                                              },
+                                            )
+                                          ],
+                                        )),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          135,
+                                      child: Text(
+                                        searchMovieResult![index]
+                                            .overview
+                                            .toString(),
+                                        textDirection: TextDirection.ltr,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12.0,
+                                            height: 1.5),
+                                      ),
                                     )
-                                  ]),
-                                ],
-                              ),
-                            ))));
+                                  ],
+                                )
+                              ]),
+                            ],
+                          ),
+                        )));
               },
             );
           } else {
