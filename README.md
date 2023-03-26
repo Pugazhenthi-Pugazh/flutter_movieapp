@@ -1,16 +1,7 @@
 # flutter_movieapp
 
-A new Flutter project.
+For this app i used TMDB API to retrive movies and series details.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![WhatsApp Image 2023-03-26 at 8 22 34 PM_google-pixel5-sortasage-portrait](https://user-images.githubusercontent.com/58655117/227785163-a1aa4030-0b18-4652-a634-b40bc8ea70dc.png)
+![WhatsApp Image 2023-03-26 at 8 22 34 PM (1)_google-pixel5-sortasage-portrait](https://user-images.githubusercontent.com/58655117/227785212-a2bee532-f97a-4faf-8fb5-002df38fc730.png)
+![WhatsApp Image 2023-03-26 at 8 22 34 PM (3)_google-pixel5-sortasage-portrait](https://user-images.githubusercontent.com/58655117/227785223-25f834e3-d3d2-4eda-a0e3-85b7b77dd08d.png)
