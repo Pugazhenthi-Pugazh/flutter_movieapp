@@ -13,7 +13,7 @@ import 'package:flutter_movieapp/model.dart/topRatedMoviesModel.dart';
 import 'package:http/http.dart' as http;
 
 class API {
-  String apiKey = '2b6e3af0b577423063b6a6e271986215';
+  String apiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
   static String mainurl = "https://api.themoviedb.org/3";
 
   var getTrendingmoivesUrl = '$mainurl/trending/movie/week';
